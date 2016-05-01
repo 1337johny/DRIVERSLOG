@@ -4,7 +4,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -21,8 +20,6 @@ public class Controller implements Initializable {
     private static ObservableList<DriveSet> set;
     private static DBC db;
 
-    @FXML
-    Parent root;
     @FXML
     Button disableBtn;
     @FXML
@@ -58,8 +55,12 @@ public class Controller implements Initializable {
     @FXML
     public void addButtonClick() {
         log.fine("Add Button Clicked...");
-        db.insertData(datePicker.getValue().toString(),Integer.parseInt(number.getText()));
-        updateTableData();
+        if (db.insertData(datePicker.getValue().toString(),Integer.parseInt(number.getText()))) {
+            setupTable();
+            updateTableData();
+            colorIt();
+        }
+
     }
 
     @FXML
@@ -69,6 +70,9 @@ public class Controller implements Initializable {
 
         if (db.deleteData(tempSet.getId())) {
             set.remove(tempSet);
+            setupTable();
+            updateTableData();
+            colorIt();
         }
     }
 
