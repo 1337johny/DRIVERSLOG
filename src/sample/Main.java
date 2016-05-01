@@ -17,7 +17,7 @@ public class Main extends Application {
         Parent root = loader.load();
         String css = this.getClass().getResource("style.css").toExternalForm();
 
-        // SET THE CONTROLLER
+        // GET THE CONTROLLER
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         Controller controller = loader.getController();
 
