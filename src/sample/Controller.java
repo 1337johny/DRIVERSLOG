@@ -70,6 +70,7 @@ public class Controller implements Initializable {
 
         if (db.deleteData(tempSet.getId())) {
             set.remove(tempSet);
+            tableView.refresh();
             setupTable();
             updateTableData();
             colorIt();
