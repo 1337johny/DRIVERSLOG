@@ -22,7 +22,7 @@ public class DBC {
      * */
     public DBC() {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://server.fritz.box/data?" + "user=johny&password=18021984");
+            conn = DriverManager.getConnection("jdbc:mysql://server.fritz.box/data?" + "user=remote&password=remote");
             query = conn.createStatement();
             System.out.println("DBC success...");
         } catch (SQLException ex) {

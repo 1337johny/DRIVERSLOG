@@ -23,39 +23,36 @@ public class Controller implements Initializable {
 
     @FXML
     Parent root;
-
     @FXML
     Button disableBtn;
-
     @FXML
     DatePicker datePicker;
-
     @FXML
     TextField number;
-
     @FXML
     TableView<DriveSet> tableView;
-
     @FXML
     TableColumn<DriveSet,Integer> colorColumn;
-
     @FXML
     TableColumn<DriveSet,Date> dateColumn;
-
     @FXML
     TableColumn<DriveSet,Integer> personColumn;
 
     //region Information Labels
+    ///////////////////////////////
+    //Totals
     @FXML
-    Label info1;
+    Label daysDriven;
     @FXML
-    Label info2;
+    Label kmDriven;
     @FXML
-    Label info3;
+    Label costTotal;
+    ///////////////////////////////
+    //a day
     @FXML
-    Label info4;
+    Label costAday;
     @FXML
-    Label info5;
+    Label kmAday;
     //endregion
 
     @FXML
@@ -64,6 +61,7 @@ public class Controller implements Initializable {
         db.insertData(datePicker.getValue().toString(),Integer.parseInt(number.getText()));
         updateTableData();
     }
+
     @FXML
     public void deleteButtonClick() {
         log.fine("Delete Button Clicked...");
@@ -73,8 +71,6 @@ public class Controller implements Initializable {
             set.remove(tempSet);
         }
     }
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -113,6 +109,7 @@ public class Controller implements Initializable {
         setData();
         tableView.setItems(set);
     }
+
     private void setData() {
         set = db.getData("drives");
     }
