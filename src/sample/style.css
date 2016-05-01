@@ -1,0 +1,7 @@
+.good {
+    -fx-background-color: aquamarine;
+}
+
+.bad {
+    -fx-background-color: #ff6e62;
+}
