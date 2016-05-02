@@ -78,6 +78,7 @@ public class Controller implements Initializable {
             basicAlert("INPUT ERROR","Please enter a valid Date");
             throw new Exception("No Date was picked");
         }
+        updateLabel();
     }
 
     @FXML
@@ -109,7 +110,7 @@ public class Controller implements Initializable {
         } else {
             basicAlert("SELECTION ERROR", "Please select a row to delete!");
         }
-
+    updateLabel();
     }
 
     @Override
