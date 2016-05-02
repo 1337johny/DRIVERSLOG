@@ -46,7 +46,6 @@
                                 <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                             </HBox.margin>
                         </Button>
-                  <Button mnemonicParsing="false" onAction="#colorIt" text="Button" />
                         <Region HBox.hgrow="ALWAYS" />
                         <Button fx:id="disableBtn" disable="true" mnemonicParsing="false" onAction="#deleteButtonClick" text="DELETE">
                             <HBox.margin>
@@ -63,7 +62,7 @@
             <children>
                 <HBox>
                     <children>
-                        <Label fx:id="info1" text="Label">
+                        <Label fx:id="daysDriven" text="Label">
                             <HBox.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </HBox.margin>
@@ -75,7 +74,7 @@
                 </HBox>
                 <HBox layoutX="10.0" layoutY="10.0">
                     <children>
-                        <Label fx:id="info2" text="Label">
+                        <Label fx:id="kmDriven" text="Label">
                             <HBox.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </HBox.margin>
@@ -84,7 +83,7 @@
                 </HBox>
                 <HBox layoutX="10.0" layoutY="110.0">
                     <children>
-                        <Label fx:id="info3" text="Label">
+                        <Label fx:id="costTotal" text="Label">
                             <HBox.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </HBox.margin>
@@ -93,7 +92,7 @@
                 </HBox>
                 <HBox layoutX="10.0" layoutY="84.0">
                     <children>
-                        <Label fx:id="info4" text="Label">
+                        <Label fx:id="kmAday" text="Label">
                             <HBox.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </HBox.margin>
@@ -102,7 +101,7 @@
                 </HBox>
                 <HBox layoutX="10.0" layoutY="121.0">
                     <children>
-                        <Label fx:id="info5" text="Label">
+                        <Label fx:id="costAday" text="Label">
                             <HBox.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                             </HBox.margin>

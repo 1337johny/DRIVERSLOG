@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -53,37 +54,79 @@ public class Controller implements Initializable {
     //endregion
 
     @FXML
-    public void addButtonClick() {
+    public void addButtonClick() throws Exception {
         log.fine("Add Button Clicked...");
-        if (db.insertData(datePicker.getValue().toString(),Integer.parseInt(number.getText()))) {
-            setupTable();
-            updateTableData();
-            colorIt();
-        }
+        if (datePicker.getValue() != null){
+            String tmp = number.getText();
+            if (!(number.getText().isEmpty())) {
+                if (db.insertData(datePicker.getValue().toString(),Integer.parseInt(number.getText()))) {
+                    setupTable();
+                    updateTableData();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            colorIt();
+                        }
+                    });
 
+                }
+            } else {
+                basicAlert("INPUT ERROR","Please enter a valid Value for the number of Persons");
+                throw new Exception("No Number of Persons where input.");
+            }
+        } else {
+            basicAlert("INPUT ERROR","Please enter a valid Date");
+            throw new Exception("No Date was picked");
+        }
     }
 
     @FXML
-    public void deleteButtonClick() {
-        log.fine("Delete Button Clicked...");
-        DriveSet tempSet = tableView.getSelectionModel().getSelectedItem();
+    public void deleteButtonClick() throws Exception{
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("DELETE");
+            alert.setHeaderText("ARE YOU SURE THAT YOU WANT TO DELETE THIS DATE?");
+            alert.setContentText("If you click OK, you cant restore the data...");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    log.fine("Delete Button Clicked...");
+                    DriveSet tempSet = tableView.getSelectionModel().getSelectedItem();
+                    if (db.deleteData(tempSet.getId())) {
+                        set.remove(tempSet);
+                        tableView.refresh();
+                        setupTable();
+                        updateTableData();
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                colorIt();
+                            }
+                        });
 
-        if (db.deleteData(tempSet.getId())) {
-            set.remove(tempSet);
-            tableView.refresh();
-            setupTable();
-            updateTableData();
-            colorIt();
+                    }
+                }
+            });
+        } else {
+            basicAlert("SELECTION ERROR", "Please select a row to delete!");
         }
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         disableBtn.setDisable(false);
+        // SETUP DATABASE
+        ////////////////////////////////////////////////////////////////////////////////////////////
         db = new DBC();
+
+        // SETUP TABLE
+        ////////////////////////////////////////////////////////////////////////////////////////////
         setupTable();
         updateTableData();
-        //System.out.println(set.toString());
+
+        // SETUP LABELS
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        updateLabel();
     }
 
     private void setupTable() {
@@ -98,7 +141,7 @@ public class Controller implements Initializable {
         for (Node n: tableView.lookupAll("TableRow")) {
             if (n instanceof TableRow) {
                 TableRow row = (TableRow) n;
-                if (tableView.getItems().get(i).getNumber()>2) {
+                if (tableView.getItems().get(i).getNumber()>= 2) {
                     row.getStyleClass().add("good");
                 } else {
                     row.getStyleClass().add("bad");
@@ -117,6 +160,35 @@ public class Controller implements Initializable {
 
     private void setData() {
         set = db.getData("drives");
+    }
+
+    private int getTotalDays () {
+        return set.size();
+    }
+
+    private int getTotalKm() {
+        return (set.size())*70;
+    }
+
+    private int getTotalCash() {
+        double tmp = set.size()*6.125;
+        return  (int)tmp;
+    }
+
+    private void updateLabel(){
+        daysDriven.setText("Total Days:\n"+getTotalDays());
+        kmDriven.setText("Total KM:\n"+getTotalKm());
+        costTotal.setText("Total Costs:\n"+getTotalCash()+" €");
+        kmAday.setText("KM a day:\n70");
+        costAday.setText("Cost a day:\n6,125");
+    }
+
+    private void basicAlert(String head, String text) {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle("ERROR");
+        a.setHeaderText(head);
+        a.setContentText(text);
+        a.show();
     }
 }
 
