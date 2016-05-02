@@ -5,3 +5,21 @@
 .bad {
     -fx-background-color: #ff6e62;
 }
+
+.dark-background {
+    -fx-background-color: #1b1b1b;
+    -fx-font-family: 'Agency FB';
+    -fx-text-fill: white;
+}
+
+.font-label {
+    -fx-font-size: 14pt;
+    -fx-font-family: 'Agency FB';
+    -fx-font-weight: regular;
+}
+
+.font-input {
+    -fx-font-size: 12pt;
+    -fx-font-family: 'Agency FB';
+    -fx-font-weight: bold;
+}

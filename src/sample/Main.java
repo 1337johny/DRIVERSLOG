@@ -30,7 +30,7 @@ public class Main extends Application {
 
         // SET THE STAGE
         ///////////////////////////////////////////////////////////////////////////////////////////////////
-        primaryStage.setTitle("DRIVERSLOG");
+        primaryStage.setTitle("DRIVERSLOG.");
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream( "DL.png" )));
         primaryStage.show();

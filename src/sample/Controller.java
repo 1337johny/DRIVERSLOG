@@ -181,7 +181,7 @@ public class Controller implements Initializable {
         kmDriven.setText("Total KM:\n"+getTotalKm());
         costTotal.setText("Total Costs:\n"+getTotalCash()+" €");
         kmAday.setText("KM a day:\n70");
-        costAday.setText("Cost a day:\n6,125");
+        costAday.setText("Cost a day:\n6,125 €");
     }
 
     private void basicAlert(String head, String text) {
